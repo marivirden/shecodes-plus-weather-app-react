@@ -1,25 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Search from "./search";
 
-function App() {
+import "./App.css";
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+      <h1>Homework Week 4</h1>
+      <Search />
+      <div>
+        <a href="https://github.com/marivirden/shecodes-plus-weather-app-react">
+          Open-source code
         </a>
-      </header>
+        , by <a href="https://github.com/marivirden">Marianna Virden</a> from{" "}
+        <a href="https://www.shecodes.io/">SheCodes</a>
+      </div>
     </div>
   );
 }
-
-export default App;
