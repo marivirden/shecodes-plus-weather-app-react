@@ -24,6 +24,11 @@ export default function Search() {
     axios.get(apiUrl).then(handleWeatherData);
   }
 
+  function formattedDate(props) {
+    return "Wednesday 7:00";
+    // console.log(props.date);
+  }
+
   function updateCity(event) {
     setCity(event.target.value);
 
@@ -49,20 +54,34 @@ export default function Search() {
           </div>
         </div>
       </form>
-      <h1>CITY</h1>
-      <ul>
-        <li>Wednesday 07:00</li>
-        <li>Mostly cloudy</li>
-      </ul>
+
+      {isSubmitted ? (
+        <>
+          <h1>{city}</h1>
+          <ul>
+            <li> {formattedDate()} </li>
+          </ul>
+        </>
+      ) : null}
       <div className="row">
         <div className="col-6">
-          <img src="" />6 °F
+          <>
+            <img
+              src={
+                isSubmitted
+                  ? `http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`
+                  : ""
+              }
+            />
+            <span className="temperature font-weight-bold">
+              {isSubmitted ? `${Math.round(weatherData.main.temp)}°F | °C` : ""}
+            </span>
+          </>
         </div>
         <div className="col-6">
           {isSubmitted ? (
             <div>
               <ul>
-                <li>Temperature: {Math.round(weatherData.main.temp)}°F </li>
                 <li>Description: {weatherData.weather[0].description}</li>
                 <li>Humidity: {Math.round(weatherData.main.humidity)}%</li>
                 <li>Wind: {Math.round(weatherData.wind.speed)} m/hr </li>
@@ -74,28 +93,3 @@ export default function Search() {
     </div>
   );
 }
-
-// export default function Search() {
-
-//   return (
-//     <div>
-//       <div>
-//         <form onSubmit={handleSubmit}>
-//           <input type="search" onChange={updateCity} />
-//           <input type="submit" value="search" />
-//         </form>
-//       </div>
-//       {isSubmitted ? (
-//         <div>
-//           <ul>
-//             <li>Temperature: {Math.round(weatherData.main.temp)}°F </li>
-//             <li>Description: {weatherData.weather[0].description}</li>
-//             <li>Humidity: {Math.round(weatherData.main.humidity)}%</li>
-//             <li>Wind: {Math.round(weatherData.wind.speed)} m/hr </li>
-//           </ul>
-//         </div>
-//       ) : null}
-//     </div>
-//   );
-
-// }
